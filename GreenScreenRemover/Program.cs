@@ -16,6 +16,7 @@ namespace GreenScreenRemover
         {
             string sourcePath = SOURCE_PATH;
             string resultPath = RESULT_PATH;
+            byte threshold = 10;
 
             if (args.Length >= 1)
             {
@@ -25,8 +26,15 @@ namespace GreenScreenRemover
             {
                 resultPath = args[1];
             }
+            if (args.Length >= 3)
+            {
+                if (byte.TryParse(args[2], out byte b))
+                {
+                    threshold = b;
+                }
+            }
 
-            removeBackground(sourcePath, resultPath);
+            removeBackground(sourcePath, resultPath, threshold);
         }
 
         private static void removeBackground(string sourcePath, string resultPath, byte threshold = 10)
